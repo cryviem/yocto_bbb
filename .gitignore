@@ -1,0 +1,3 @@
+poky/
+build/*
+!build/conf/
