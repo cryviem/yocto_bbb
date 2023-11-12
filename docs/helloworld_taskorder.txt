@@ -1,0 +1,15 @@
+1) do_listtasks: 
+2) do_fetch:
+3) do_unpack:
+4) do_prepare_recipe_sysroot: copy dependencies to recipe-sysroot
+5) do_patch
+6) do_populate_lic
+7) do_deploy_source_date_epoch
+8) do_configure
+9) do_compile
+10) do_install: install bin files to image/ directory
+11) do_populate_sysroot: copy outputs to sysroot_destdir which is used by other packages
+12) do_package
+13) do_packagedata
+14) do_package_write_rpm
+15) do_package_qa
