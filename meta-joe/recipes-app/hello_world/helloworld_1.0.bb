@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 # Add bitbake search path
 FILESEXTRAPATHS:append := ":${JOE_SRC}/${PN}"
 
-SRC_URI = "file://helloworld.c"
+SRC_URI = "file://helloworld.c  file://CMakeLists.txt"
+
+inherit cmake
 
 python do_display_banner() {
     bb.plain("***********************************************");
@@ -20,9 +22,10 @@ addtask display_banner before do_build
 
 S = "${WORKDIR}"
 
-do_compile() {
-	${CC} ${LDFLAGS} helloworld.c -o helloworld
-}
+# Don't need specify do_compile since handled by cmake class
+#do_compile() {
+#	${CC} ${LDFLAGS} helloworld.c -o helloworld
+#}
 
 do_install() {
 	install -d ${D}${bindir}
