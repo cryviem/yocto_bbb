@@ -1,0 +1,71 @@
+From e5f59bd5cd8e5571d8a59acbffdcb22eaeef78e0 Mon Sep 17 00:00:00 2001
+From: Hong An <an23593@gmail.com>
+Date: Sun, 28 Jan 2024 20:58:02 +0700
+Subject: [PATCH 1/1] add joe module
+
+Signed-off-by: Hong An <an23593@gmail.com>
+---
+ drivers/misc/Kconfig          |  4 ++++
+ drivers/misc/Makefile         |  1 +
+ drivers/misc/joe_do_nothing.c | 24 ++++++++++++++++++++++++
+ 3 files changed, 29 insertions(+)
+ create mode 100644 drivers/misc/joe_do_nothing.c
+
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index 0f5a49fc7c9e..60f071ac7e58 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -470,6 +470,10 @@ config HISI_HIKEY_USB
+ 	  switching between the dual-role USB-C port and the USB-A host ports
+ 	  using only one USB controller.
+ 
++config JOE_DO_NOTHING
++	tristate "Joe do nothing driver"
++	help
++		As named, it do nothing, just print log to prove its existence
+ source "drivers/misc/c2port/Kconfig"
+ source "drivers/misc/eeprom/Kconfig"
+ source "drivers/misc/cb710/Kconfig"
+diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+index a086197af544..5781006fb153 100644
+--- a/drivers/misc/Makefile
++++ b/drivers/misc/Makefile
+@@ -59,3 +59,4 @@ obj-$(CONFIG_UACCE)		+= uacce/
+ obj-$(CONFIG_XILINX_SDFEC)	+= xilinx_sdfec.o
+ obj-$(CONFIG_HISI_HIKEY_USB)	+= hisi_hikey_usb.o
+ obj-$(CONFIG_HI6421V600_IRQ)	+= hi6421v600-irq.o
++obj-$(CONFIG_JOE_DO_NOTHING)	+= joe_do_nothing.o
+diff --git a/drivers/misc/joe_do_nothing.c b/drivers/misc/joe_do_nothing.c
+new file mode 100644
+index 000000000000..6069f624f62b
+--- /dev/null
++++ b/drivers/misc/joe_do_nothing.c
+@@ -0,0 +1,24 @@
++#include <linux/module.h>
++#include <linux/init.h>
++#include <linux/version.h>
++#include <linux/kernel.h>
++
++/* Call on install*/
++static int __init joe_init(void) /* Constructor */
++{
++    printk(KERN_INFO "Hello: joe registered\n");
++    return 0;
++}
++
++/* Call on uninstall*/
++static void __exit joe_exit(void) /* Destructor */
++{
++    printk(KERN_INFO "Goodbye: joe unregistered\n");
++}
++
++module_init(joe_init);
++module_exit(joe_exit);
++
++MODULE_LICENSE("GPL");
++MODULE_AUTHOR("Name of author");
++MODULE_DESCRIPTION("Description...");
+\ No newline at end of file
+-- 
+2.34.1
+
