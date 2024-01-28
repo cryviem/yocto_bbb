@@ -10,7 +10,8 @@ SBL=MLO
 UBOOT=u-boot.img
 KERNEL=zImage
 DTB=am335x-boneblack.dtb
-ROOTFS=core-image-minimal-beaglebone-yocto.tar.bz2
+ROOTFS=joe-image-full-beaglebone-yocto.tar.bz2
+MODULES=modules-beaglebone-yocto.tgz
 
 # Make sure we have sufficient images to go
 if [ -z $1 ]
@@ -57,12 +58,19 @@ then
     exit 1
 fi
 
+if [ ! -f ${IMAGE_DIR}/${MODULES} ]
+then
+    echo "${IMAGE_DIR}/${MODULES} not found"
+    exit 1
+fi
+
 # Make sure sdcard is plugged and mounted properly
 if [ ! -d "${BOOT_DIR}" ]
 then
     echo "${BOOT_DIR} does NOT exist, try mounting..."
     if [ -b ${USB_DEV1} ]
     then
+        mkdir -p ${BOOT_DIR}
         mount ${USB_DEV1} ${BOOT_DIR}
     fi
 
@@ -78,6 +86,7 @@ then
     echo "${ROOTFS_DIR} does NOT exist, try mounting..."
     if [ -b ${USB_DEV2} ]
     then
+        mkdir -p ${ROOTFS_DIR}
         mount ${USB_DEV2} ${ROOTFS_DIR}
     fi
 
@@ -102,6 +111,7 @@ update_rootfs() {
     rm -rf ${ROOTFS_DIR}/*
     # then extract over
     tar -xvf ${IMAGE_DIR}/${ROOTFS} -C ${ROOTFS_DIR}
+    tar -xvf ${IMAGE_DIR}/${MODULES} -C ${ROOTFS_DIR}/usr
 }
 
 unmount_sdcard() {
