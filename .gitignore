@@ -1,3 +1,5 @@
 poky/
 build/*
 !build/conf/
+output/
+bbb_output.tar.gz

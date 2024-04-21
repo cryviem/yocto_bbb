@@ -1,31 +1,28 @@
-SUMMARY = "Sample out of tree kernel modlue"
-DESCRIPTION = "Sample out of tree kernel modlue"
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
+SUMMARY = "Example out-of-tree kernel module building"
+DESCRIPTION = "${SUMMARY}"
+LICENSE = "GPL-2.0-only"
+LIC_FILES_CHKSUM = "file://COPYING;md5=12f884d2ae1ff87c09e5b7ccc2c4ca7e"
 
-# Add bitbake search path
-# FILESEXTRAPATHS:append := ":${JOE_SRC}/${PN}"
-
-SRC_URI = "file://choen.c  file://Makefile"
+inherit module
 
 python do_display_banner() {
     bb.plain("***********************************************");
     bb.plain("*                                             *");
-    bb.plain("*  META-JOE > build sample-oot ...        *");
+    bb.plain("*  META-JOE > build sample-oot ...            *");
     bb.plain("*                                             *");
     bb.plain("***********************************************");
 }
 
 addtask display_banner before do_build
 
+SRC_URI = "file://Makefile \
+           file://choen.c \
+           file://COPYING \
+          "
+
 S = "${WORKDIR}"
 
-# Don't need specify do_compile since handled by cmake class
-#do_compile() {
-#	${CC} ${LDFLAGS} helloworld.c -o helloworld
-#}
+# The inherit of module.bbclass will automatically name module packages with
+# "kernel-module-" prefix as required by the oe-core build environment.
 
-do_install() {
-	install -d ${D}${bindir}
-	install -m 0755 helloworld ${D}${bindir}
-}
+RPROVIDES:${PN} += "kernel-module-sample-oot"
