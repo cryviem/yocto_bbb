@@ -1,6 +1,7 @@
 obj-m := choen.o
 
 SRC := $(shell pwd)
+# KERNEL_SRC is automatically initialized by module.bbclass to STAGING_KERNEL_DIR (tmp/work-shared/kernel-source)
 
 all:
 	$(MAKE) -C $(KERNEL_SRC) M=$(SRC)
