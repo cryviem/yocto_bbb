@@ -8,6 +8,8 @@ FILESEXTRAPATHS:append := ":${JOE_SRC}/${PN}"
 
 SRC_URI = "file://helloworld.c  file://CMakeLists.txt"
 
+DEPENDS := "jlib"
+
 inherit cmake
 
 python do_display_banner() {
