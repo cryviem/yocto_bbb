@@ -12,6 +12,7 @@ SBL=MLO
 UBOOT=u-boot.img
 KERNEL=zImage
 DTB=am335x-boneblack.dtb
+DTB_JOE=am335x-boneblack-joe.dtb
 ROOTFS=joe-image-full-beaglebone-yocto.tar.bz2
 MODULES=modules-beaglebone-yocto.tgz
 
@@ -93,15 +94,15 @@ update_rootfs() {
     tar -xvf ${IMAGE_DIR}/${MODULES} -C ${ROOTFS_DIR}
 }
 
-unmount_sdcard() {
-    umount ${BOOT_DIR}
-    umount ${ROOTFS_DIR}
-}
-
 update_boot ${SBL}
 update_boot ${UBOOT}
 update_boot ${KERNEL}
 update_boot ${DTB}
+if [ -f ${IMAGE_DIR}/${DTB_JOE} ]
+then
+    echo "coping ${DTB_JOE} ..."
+    update_boot ${DTB_JOE}
+fi
 update_rootfs
 echo "Finish copying!"
 echo "Zipping..."

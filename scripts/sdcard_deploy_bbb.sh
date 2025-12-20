@@ -10,6 +10,7 @@ SBL=MLO
 UBOOT=u-boot.img
 KERNEL=zImage
 DTB=am335x-boneblack.dtb
+DTB_JOE=am335x-boneblack-joe.dtb
 ROOTFS=joe-image-full-beaglebone-yocto.tar.bz2
 MODULES=modules-beaglebone-yocto.tgz
 
@@ -123,6 +124,10 @@ update_boot ${SBL}
 update_boot ${UBOOT}
 update_boot ${KERNEL}
 update_boot ${DTB}
+if [ -f ${IMAGE_DIR}/${DTB_JOE} ]
+then
+    update_boot ${DTB_JOE}
+fi
 update_rootfs
 echo "All done, wait a bit for syncing and un-mount SDCARD..."
 sleep 1
