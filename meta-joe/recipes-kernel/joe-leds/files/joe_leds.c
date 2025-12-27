@@ -7,9 +7,9 @@
 #include <linux/gpio/consumer.h>
 
 struct joeleds_dev_handler_t {
-    char label[20];
-    struct gpio_desc *pdesc;
-    struct device *pdev;
+    char label[20];                 // label of each child node in DT
+    struct gpio_desc *pdesc;        // gpio descriptor corresponding to each child node in DT
+    struct device *pdev;            // logical device created in probe() corresponding to each child node in DT
 };
 
 struct joeleds_drv_handler_t {
