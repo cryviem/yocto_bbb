@@ -1,5 +1,10 @@
 FILESEXTRAPATHS:append := ":${THISDIR}/files"
-SRC_URI += "file://joe_do_nothing.cfg file://0001-add-joe-module.patch file://am335x-boneblack-joe.dts"
+SRC_URI += " \
+            file://enable_usb_gadget.cfg \
+            file://joe_do_nothing.cfg \
+            file://0001-add-joe-module.patch \
+            file://am335x-boneblack-joe.dts \
+            "
 
 # Copy custom device tree to kernel source before compilation
 do_configure:prepend() {
