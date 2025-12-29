@@ -1,0 +1,34 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides: mini_usb
+# Required-Start:
+# Required-Stop:
+# Default-Start:     S
+# Default-Stop:
+# Short-Description: Init Mini USB gadget
+### END INIT INFO
+
+JOE_INSTALL_SCRIPTS=/joe/scripts
+
+case "$1" in
+  start)
+    echo "init_mini_usb start"
+    $JOE_INSTALL_SCRIPTS/setup_usb_gadget.sh
+    $JOE_INSTALL_SCRIPTS/terminal_over_acm.sh
+    ;;
+  stop)
+    echo "init_mini_usb stop"
+    $JOE_INSTALL_SCRIPTS/clean_usb_gadget.sh
+    pkill -f "getty -L $ACM_DEVICE 115200 vt100"
+    ;;
+  restart)
+    $0 stop
+    $0 start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart}"
+    exit 1
+    ;;
+esac
+
+exit 0
