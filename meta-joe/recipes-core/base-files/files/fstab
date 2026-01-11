@@ -1,0 +1,4 @@
+# joe custom mount configuration
+
+# mount user data partition, still able to boot if partition not available
+/dev/mmcblk0p7  /data  ext4  defaults,noatime,nofail  0  2

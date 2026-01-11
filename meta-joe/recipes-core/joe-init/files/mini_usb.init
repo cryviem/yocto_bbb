@@ -14,12 +14,15 @@ case "$1" in
   start)
     echo "init_mini_usb start"
     $JOE_INSTALL_SCRIPTS/setup_usb_gadget.sh
-    $JOE_INSTALL_SCRIPTS/terminal_over_acm.sh
+    $JOE_INSTALL_SCRIPTS/setup_ecm.sh &
+    $JOE_INSTALL_SCRIPTS/terminal_over_acm.sh &
+
     ;;
   stop)
     echo "init_mini_usb stop"
     $JOE_INSTALL_SCRIPTS/clean_usb_gadget.sh
-    pkill -f "getty -L $ACM_DEVICE 115200 vt100"
+    pkill -f "setup_ecm.sh"
+    pkill -f "terminal_over_acm.sh"
     ;;
   restart)
     $0 stop

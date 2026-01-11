@@ -9,3 +9,6 @@ IMAGE_INSTALL = "\
     "
 
 inherit core-image
+
+# Ensure boot-script is built and deployed alongside the image
+do_image[depends] += "boot-script:do_deploy"

@@ -1,0 +1,31 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides: joe_tools
+# Required-Start:
+# Required-Stop:
+# Default-Start:     S
+# Default-Stop:
+# Short-Description: Init Joe Tools
+### END INIT INFO
+
+JOE_INSTALL_SCRIPTS=/joe/scripts
+
+case "$1" in
+  start)
+    echo "joe_tools start"
+    $JOE_INSTALL_SCRIPTS/firmware_confirm.sh &
+    ;;
+  stop)
+    echo "joe_tools stop"
+    ;;
+  restart)
+    $0 stop
+    $0 start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart}"
+    exit 1
+    ;;
+esac
+
+exit 0

@@ -9,6 +9,7 @@ SRC_URI += " \
             file://setup_usb_gadget.sh \
             file://clean_usb_gadget.sh \
             file://terminal_over_acm.sh \
+            file://setup_ecm.sh \
             file://mini_usb.init \
             "
 
@@ -26,4 +27,5 @@ do_install() {
     install -m 0775 ${WORKDIR}/setup_usb_gadget.sh ${D}${JOE_INSTALL_SCRIPTS}
     install -m 0775 ${WORKDIR}/clean_usb_gadget.sh ${D}${JOE_INSTALL_SCRIPTS}
     install -m 0775 ${WORKDIR}/terminal_over_acm.sh ${D}${JOE_INSTALL_SCRIPTS}
+    install -m 0775 ${WORKDIR}/setup_ecm.sh ${D}${JOE_INSTALL_SCRIPTS}
 }
