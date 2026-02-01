@@ -13,7 +13,7 @@ SRC_URI += " \
             file://mini_usb.init \
             "
 
-FILES:${PN} += "/joe"
+FILES:${PN} += "${JOE_INSTALL_SCRIPTS}"
 
 inherit update-rc.d
 

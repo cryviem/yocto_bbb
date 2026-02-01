@@ -1,0 +1,30 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides: joe_apps
+# Required-Start:
+# Required-Stop:
+# Default-Start:     S
+# Default-Stop:
+# Short-Description: Init Joe Apps
+### END INIT INFO
+
+
+case "$1" in
+  start)
+    echo "joe_apps start"
+    
+    ;;
+  stop)
+    echo "joe_apps stop"
+    ;;
+  restart)
+    $0 stop
+    $0 start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|restart}"
+    exit 1
+    ;;
+esac
+
+exit 0

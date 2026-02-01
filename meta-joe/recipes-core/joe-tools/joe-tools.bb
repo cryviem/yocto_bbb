@@ -11,7 +11,7 @@ SRC_URI += " \
             file://joe_tools.init \
             "
 
-FILES:${PN} += "/joe"
+FILES:${PN} += "${JOE_INSTALL_SCRIPTS}"
 
 inherit update-rc.d
 
