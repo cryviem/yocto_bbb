@@ -6,5 +6,5 @@ include(useful_things)
 # Build the timesync service executable
 build_exe(
     TARGET      ${PROJECT_NAME}
-    SRCS        main.cpp
+    SRCS        main.cpp timesync.cpp
 )
